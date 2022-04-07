@@ -31,15 +31,17 @@ extension Pinnable {
     ///   - edges: The edges to constrain. Defaults to `.all`.
     ///   - object: The object to constrain the receiver to.
     ///   - insets: Optional insets to apply to the constraints. Defaults to `.zero`.
+    ///   - priority: An optional priority for the constraints. Defaults to `.required`.
     /// - Returns: A named tuple of the created constraints. The properties are optional, as edges not specified will not have constraints.
     @available(iOS 13.0, *)
     @discardableResult public func pinEdges<P: Pinnable>(
         _ edges: NSDirectionalRectEdge = .all,
         to object: P,
-        insets: NSDirectionalEdgeInsets = .zero
+        insets: NSDirectionalEdgeInsets = .zero,
+        priority: UILayoutPriority = .required
     ) -> (top: NSLayoutConstraint?, leading: NSLayoutConstraint?, bottom: NSLayoutConstraint?, trailing: NSLayoutConstraint?) {
         let insets = UIEdgeInsets(top: insets.top, left: insets.leading, bottom: insets.bottom, right: insets.trailing)
-        return pinEdges(.init(rawValue: edges.rawValue), to: object, insets: insets)
+        return pinEdges(.init(rawValue: edges.rawValue), to: object, insets: insets, priority: priority)
     }
 
     /// Constrain the edges of the receiver to the corresponding edges of the provided view or layout guide.
@@ -48,12 +50,14 @@ extension Pinnable {
     ///   - edges: The edges to constrain. The `left` and `right` edge will constrain the `leading` and `trailing` anchors, respectively. Defaults to `.all`.
     ///   - object: The object to constrain the receiver to.
     ///   - insets: Optional insets to apply to the constraints. The top, left, bottom, and right constants will be applied to the top, leading, bottom, and trailing edges, respectively. Defaults to `.zero`.
+    ///   - priority: An optional priority for the constraints. Defaults to `.required`.
     /// - Returns: A named tuple of the created constraints. The properties are optional, as edges not specified will not have constraints.
     @available(iOS, deprecated: 13.0, message: "Use leading and trailing instead of left and right, respectively.")
     @_disfavoredOverload @discardableResult public func pinEdges<P: Pinnable>(
         _ edges: UIRectEdge = .all,
         to object: P,
-        insets: UIEdgeInsets = .zero
+        insets: UIEdgeInsets = .zero,
+        priority: UILayoutPriority = .required
     ) -> (top: NSLayoutConstraint?, leading: NSLayoutConstraint?, bottom: NSLayoutConstraint?, trailing: NSLayoutConstraint?) {
         let top = edges.contains(.top) ? topAnchor.constraint(equalTo: object.topAnchor, constant: insets.top) : nil
         let leading = edges.contains(.left) ? leadingAnchor.constraint(equalTo: object.leadingAnchor, constant: insets.left) : nil
@@ -61,7 +65,7 @@ extension Pinnable {
         let trailing = edges.contains(.right) ? trailingAnchor.constraint(equalTo: object.trailingAnchor, constant: -insets.right) : nil
 
         disableTranslatesAutoresizingMaskIntoConstraintsIfNeeded()
-        NSLayoutConstraint.activate([top, leading, bottom, trailing].compactMap { $0 })
+        NSLayoutConstraint.activate([top, leading, bottom, trailing].compactMap { $0?.prioritize(priority) })
 
         return (top: top, leading: leading, bottom: bottom, trailing: trailing)
     }
