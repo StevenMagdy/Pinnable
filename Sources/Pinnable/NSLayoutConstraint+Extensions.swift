@@ -35,7 +35,18 @@ extension NSLayoutConstraint {
 
     internal func setUp() -> NSLayoutConstraint {
         (firstItem as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
-        activate()
-        return self
+        return activate()
+    }
+
+    public func copyWith(multiplier: CGFloat) -> Self {
+        .init(
+            item: firstItem as Any,
+            attribute: firstAttribute,
+            relatedBy: relation,
+            toItem: secondItem,
+            attribute: secondAttribute,
+            multiplier: multiplier,
+            constant: constant
+        ).prioritize(priority)
     }
 }
