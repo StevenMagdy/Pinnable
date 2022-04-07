@@ -32,9 +32,9 @@ extension Pinnable {
     ///   - object: The object to constrain the receiver to.
     ///   - insets: Optional insets to apply to the constraints. The top, left, bottom, and right constants will be applied to the top, leading, bottom, and trailing edges, respectively. Defaults to `.zero`.
     /// - Returns: A named tuple of the created constraints. The properties are optional, as edges not specified will not have constraints.
-    @discardableResult public func pinEdges(
+    @discardableResult public func pinEdges<P: Pinnable>(
         _ edges: UIRectEdge = .all,
-        to object: Pinnable,
+        to object: P,
         insets: UIEdgeInsets = .zero
     ) -> (top: NSLayoutConstraint?, leading: NSLayoutConstraint?, bottom: NSLayoutConstraint?, trailing: NSLayoutConstraint?) {
         let top = edges.contains(.top) ? topAnchor.pin(to: object.topAnchor, constant: insets.top) : nil
@@ -54,8 +54,8 @@ extension Pinnable {
     ///   - object: The object to constrain the receiver to.
     ///   - offset: An optional offset for the constraints. The horizontal offset will be applied to the center X anchor, and the vertical offset will be applied to the center Y anchor. Defaults to `.zero`.
     /// - Returns: A named tuple of the created constraints.
-    @discardableResult public func pinCenter(
-        to object: Pinnable,
+    @discardableResult public func pinCenter<P: Pinnable>(
+        to object: P,
         offset: UIOffset = .zero
     ) -> (x: NSLayoutConstraint, y: NSLayoutConstraint) {
         let centerX = centerXAnchor.pin(to: object.centerXAnchor, constant: offset.horizontal)
@@ -76,8 +76,8 @@ extension Pinnable {
     /// - Parameters:
     ///   - object: The object to constrain the receiver to.
     /// - Returns: A named tuple of the created constraints.
-    @discardableResult public func pinSize(
-        to object: Pinnable
+    @discardableResult public func pinSize<P: Pinnable>(
+        to object: P
     ) -> (width: NSLayoutConstraint, height: NSLayoutConstraint) {
         let height = heightAnchor.pin(to: object.heightAnchor)
         let width = widthAnchor.pin(to: object.widthAnchor)
