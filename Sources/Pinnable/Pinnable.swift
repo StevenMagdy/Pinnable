@@ -3,6 +3,7 @@ import UIKit
 #elseif canImport(AppKit)
 import AppKit
 #endif
+
 /// A shared interface for the pinnable properties of `UIView` and `UILayoutGuide`.
 public protocol Pinnable: AnyObject {
   var topAnchor: NSLayoutYAxisAnchor { get }

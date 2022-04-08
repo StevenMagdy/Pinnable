@@ -3,6 +3,7 @@ import UIKit
 #elseif canImport(AppKit)
 import AppKit
 #endif
+
 extension NSLayoutAnchor {
   /// Create an equal-to constraint between the receiver and the provided layout anchor.  The constraint is automatically activated.
   ///
@@ -22,7 +23,7 @@ extension NSLayoutAnchor {
     constant: CGFloat = 0,
     priority: Priority = .required
   ) -> NSLayoutConstraint {
-    constraint(equalTo: anchor, constant: constant)
+    return constraint(equalTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)
       .prioritize(priority)
       .setUp()
@@ -46,7 +47,7 @@ extension NSLayoutAnchor {
     constant: CGFloat = 0,
     priority: Priority = .required
   ) -> NSLayoutConstraint {
-    constraint(greaterThanOrEqualTo: anchor, constant: constant)
+    return constraint(greaterThanOrEqualTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)
       .prioritize(priority)
       .setUp()
@@ -70,7 +71,7 @@ extension NSLayoutAnchor {
     constant: CGFloat = 0,
     priority: Priority = .required
   ) -> NSLayoutConstraint {
-    constraint(lessThanOrEqualTo: anchor, constant: constant)
+    return constraint(lessThanOrEqualTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)
       .prioritize(priority)
       .setUp()

@@ -39,7 +39,7 @@ extension NSLayoutConstraint {
   }
 
   public func copyWith(multiplier: CGFloat) -> Self {
-    .init(
+    return .init(
       item: firstItem as Any,
       attribute: firstAttribute,
       relatedBy: relation,
