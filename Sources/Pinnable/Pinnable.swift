@@ -180,20 +180,4 @@ extension Pinnable {
 
     return (width: width, height: height)
   }
-
-  /// Constrain the width and height of the receiver to the provided constant.
-  ///
-  /// Note: to constrain a view or layout guide in a single dimension, pin the desired layout anchor directly, e.g.:
-  ///
-  ///     a.widthAnchor.pin(to: 100)
-  ///
-  /// - Parameters:
-  ///   - object: The size to constrain the receiver's width and height to.
-  /// - Returns: A named tuple of the created constraints.
-  @discardableResult
-  public func pinSize(
-    to constant: CGFloat
-  ) -> (width: NSLayoutConstraint, height: NSLayoutConstraint) {
-    pinSize(to: CGSize(width: constant, height: constant))
-  }
 }
