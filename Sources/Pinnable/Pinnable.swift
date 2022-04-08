@@ -7,9 +7,13 @@ import AppKit
 /// A shared interface for the pinnable properties of `UIView` and `UILayoutGuide`.
 public protocol Pinnable: AnyObject {
   var topAnchor: NSLayoutYAxisAnchor { get }
+  var bottomAnchor: NSLayoutYAxisAnchor { get }
+
+  var leftAnchor: NSLayoutXAxisAnchor { get }
+  var rightAnchor: NSLayoutXAxisAnchor { get }
+
   var leadingAnchor: NSLayoutXAxisAnchor { get }
   var trailingAnchor: NSLayoutXAxisAnchor { get }
-  var bottomAnchor: NSLayoutYAxisAnchor { get }
 
   var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
   var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
