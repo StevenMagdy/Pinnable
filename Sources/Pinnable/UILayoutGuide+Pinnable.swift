@@ -1,11 +1,14 @@
+#if canImport(UIKit)
 import UIKit
-
-extension UILayoutGuide: Pinnable {
+#elseif canImport(AppKit)
+import AppKit
+#endif
+extension LayoutGuide: Pinnable {
   /// Equivalent to `bottomAnchor`.
   public var firstBaselineAnchor: NSLayoutYAxisAnchor {
     bottomAnchor
   }
-  
+
   /// Equivalent to `bottomAnchor`.
   public var lastBaselineAnchor: NSLayoutYAxisAnchor {
     bottomAnchor

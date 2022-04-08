@@ -1,4 +1,8 @@
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 extension NSLayoutConstraint {
   /// Set `isActive` to true.
@@ -24,13 +28,13 @@ extension NSLayoutConstraint {
   /// - Parameter priority: The value of the priority.
   /// - Returns: self
   @discardableResult
-  public func prioritize(_ priority: UILayoutPriority) -> Self {
+  public func prioritize(_ priority: Priority) -> Self {
     self.priority = priority
     return self
   }
 
   internal func setUp() -> NSLayoutConstraint {
-    (firstItem as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
+    (firstItem as? View)?.translatesAutoresizingMaskIntoConstraints = false
     return activate()
   }
 

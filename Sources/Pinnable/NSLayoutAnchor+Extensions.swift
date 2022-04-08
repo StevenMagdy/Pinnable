@@ -1,5 +1,8 @@
+#if canImport(UIKit)
 import UIKit
-
+#elseif canImport(AppKit)
+import AppKit
+#endif
 extension NSLayoutAnchor {
   /// Create an equal-to constraint between the receiver and the provided layout anchor.  The constraint is automatically activated.
   ///
@@ -17,7 +20,7 @@ extension NSLayoutAnchor {
     to anchor: NSLayoutAnchor<AnchorType>,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(equalTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)
@@ -41,14 +44,14 @@ extension NSLayoutAnchor {
     greaterThan anchor: NSLayoutAnchor<AnchorType>,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(greaterThanOrEqualTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)
       .prioritize(priority)
       .setUp()
   }
-  
+
   /// Create a less-than-or-equal-to constraint between the receiver and the provided layout anchor.  The constraint is automatically activated.
   ///
   /// If the receiver is an anchor on a `UIView`, this method disables `translatesAutoresizingMaskIntoConstraints` on that view.
@@ -65,7 +68,7 @@ extension NSLayoutAnchor {
     lessThan anchor: NSLayoutAnchor<AnchorType>,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(lessThanOrEqualTo: anchor, constant: constant)
       .copyWith(multiplier: multiplier)

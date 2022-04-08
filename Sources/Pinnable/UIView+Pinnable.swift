@@ -1,3 +1,1 @@
-import UIKit
-
-extension UIView: Pinnable {}
+extension View: Pinnable {}

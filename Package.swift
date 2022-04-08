@@ -6,6 +6,8 @@ let package = Package(
     name: "Pinnable",
     platforms: [
         .iOS(.v9),
+        .macOS(.v10_11),
+        .tvOS(.v9),
     ],
     products: [
         .library(name: "Pinnable", targets: ["Pinnable"]),

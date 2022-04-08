@@ -1,5 +1,8 @@
+#if canImport(UIKit)
 import UIKit
-
+#elseif canImport(AppKit)
+import AppKit
+#endif
 extension NSLayoutDimension {
   /// Constrain the receiver to a constant size.  The constraint is automatically activated.
   /// - Parameters:
@@ -9,7 +12,7 @@ extension NSLayoutDimension {
   @discardableResult
   public func pin(
     to constant: CGFloat,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(equalToConstant: constant)
       .prioritize(priority)
@@ -24,7 +27,7 @@ extension NSLayoutDimension {
   @discardableResult
   public func pin(
     greaterThan constant: CGFloat,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(greaterThanOrEqualToConstant: constant)
       .prioritize(priority)
@@ -39,7 +42,7 @@ extension NSLayoutDimension {
   @discardableResult
   public func pin(
     lessThan constant: CGFloat,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(lessThanOrEqualToConstant: constant)
       .prioritize(priority)
@@ -61,7 +64,7 @@ extension NSLayoutDimension {
     to anchor: NSLayoutDimension,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(equalTo: anchor, multiplier: multiplier, constant: constant)
       .prioritize(priority)
@@ -83,7 +86,7 @@ extension NSLayoutDimension {
     greaterThan anchor: NSLayoutDimension,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(greaterThanOrEqualTo: anchor, multiplier: multiplier, constant: constant)
       .prioritize(priority)
@@ -104,7 +107,7 @@ extension NSLayoutDimension {
   public func pin(
     lessThan anchor: NSLayoutDimension,
     multiplier: CGFloat = 1, constant: CGFloat = 0,
-    priority: UILayoutPriority = .required
+    priority: Priority = .required
   ) -> NSLayoutConstraint {
     constraint(lessThanOrEqualTo: anchor, multiplier: multiplier, constant: constant)
       .prioritize(priority)
