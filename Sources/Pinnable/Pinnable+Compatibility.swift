@@ -18,9 +18,9 @@ internal typealias LegacyEdgeInsets = NSEdgeInsets
 internal typealias LegacyRectEdge = Set<NSRectEdge>
 internal typealias View = NSView
 extension NSRectEdge {
-  internal static var top: Self { .minY }
-  internal static var bottom: Self { .maxY }
+  internal static var top: Self { .maxY }
   internal static var left: Self { .minX }
+  internal static var bottom: Self { .minY }
   internal static var right: Self { .maxX }
 }
 #endif

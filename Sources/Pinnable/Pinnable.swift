@@ -48,8 +48,8 @@ extension Pinnable {
 #elseif canImport(AppKit)
     var oldEdges: Set<NSRectEdge> = []
     if edges.contains(.top) { oldEdges.insert(.top) }
-    if edges.contains(.bottom) { oldEdges.insert(.bottom) }
     if edges.contains(.leading) { oldEdges.insert(.left) }
+    if edges.contains(.bottom) { oldEdges.insert(.bottom) }
     if edges.contains(.trailing) { oldEdges.insert(.right) }
 #endif
     return _pinEdges(oldEdges, to: object, insets: insets, priority: priority)
@@ -75,7 +75,7 @@ extension Pinnable {
     to object: P,
     insets: UIEdgeInsets = .zero,
     priority: Priority = .required
-  ) -> (top: NSLayoutConstraint?, left: NSLayoutConstraint?, bottom: NSLayoutConstraint?, right: NSLayoutConstraint?) {
+  ) -> (top: NSLayoutConstraint?, leading: NSLayoutConstraint?, bottom: NSLayoutConstraint?, trailing: NSLayoutConstraint?) {
     return _pinEdges(edges, to: object, insets: insets, priority: priority)
   }
 
@@ -84,9 +84,9 @@ extension Pinnable {
   /// Constrain the edges of the receiver to the corresponding edges of the provided view or layout guide.
   ///
   /// - Parameters:
-  ///   - edges: The edges to constrain. The `left` and `right` edge will constrain the `leading` and `trailing` anchors, respectively. Defaults to `.all`.
+  ///   - edges: The edges to constrain. The `minX` and `maxX` edge will constrain the `leading` and `trailing` anchors, respectively. Defaults to all four edges.
   ///   - object: The object to constrain the receiver to.
-  ///   - insets: Optional insets to apply to the constraints. The top, left, bottom, and right constants will be applied to the top, leading, bottom, and trailing edges, respectively. Defaults to `.zero`.
+  ///   - insets: Optional insets to apply to the constraints. The top, left, bottom, and right constants will be applied to the top, leading, bottom, and trailing edges, respectively. Defaults to `NSEdgeInsetsZero`.
   ///   - priority: An optional priority for the constraints. Defaults to `.required`.
   /// - Returns: A named tuple of the created constraints. The properties are optional, as edges not specified will not have constraints.
   @available(iOS, deprecated: 13.0, message: "Use leading and trailing instead of left and right, respectively.")
@@ -99,7 +99,7 @@ extension Pinnable {
     to object: P,
     insets: NSEdgeInsets = NSEdgeInsetsZero,
     priority: Priority = .required
-  ) -> (top: NSLayoutConstraint?, left: NSLayoutConstraint?, bottom: NSLayoutConstraint?, right: NSLayoutConstraint?) {
+  ) -> (top: NSLayoutConstraint?, leading: NSLayoutConstraint?, bottom: NSLayoutConstraint?, trailing: NSLayoutConstraint?) {
     return _pinEdges(edges, to: object, insets: insets, priority: priority)
   }
 #endif
